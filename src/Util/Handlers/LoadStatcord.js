@@ -1,10 +1,11 @@
 const { Client } = require("statcord.js");
+const config = require(`${process.cwd()}/config.json`);
 
 module.exports = {
 	LoadStatcord: (client) =>
 		(client.statcord = new Client({
 			client,
-			key: "statcord.com-1boKi2o8zat972yoej5K",
+			key: config.statcordKey,
 			postCpuStatistics: false,
 			postMemStatistics: false,
 			postNetworkStatistics: false
