@@ -1,10 +1,11 @@
 import { Client } from "statcord.js";
 import { BotClient } from "../Classes/BotClient";
+const config = require(`${process.cwd()}/config.json`);
 
 export const LoadStatcord = (client: BotClient) =>
 	(client.statcord = new Client({
 		client,
-		key: "statcord.com-1boKi2o8zat972yoej5K",
+		key: config.statcordKey,
 		postCpuStatistics: false,
 		postMemStatistics: false,
 		postNetworkStatistics: false
