@@ -1,3 +1,5 @@
+import { RunCommand, RunInteraction } from "../TypeScript/Interfaces";
+
 export class Command {
 	name: string;
 	aliases?: string[];
@@ -10,7 +12,7 @@ export class Command {
 	examples?: string;
 	category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration";
 	path: string;
-	run: Promise<any>;
+	run: RunCommand;
 
 	constructor(data: { name: string; aliases?: string[]; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration"; run: Promise<any> }) {
 		for (const property of Object.keys(data)) {
@@ -24,8 +26,8 @@ export class InteractionCommand {
 	description: string;
 	type: "button" | "slash" | "user_ui" | "message_ui";
 	options: InteractionOption[];
-	path;
-	run: Promise<any>;
+	path: string;
+	run: RunInteraction;
 
 	constructor(data: { name: string; description: string; type: "button" | "slash" | "user_ui" | "message_ui"; options: InteractionOption[]; run: Promise<any> }) {
 		for (const property of Object.keys(data)) {

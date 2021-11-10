@@ -16,7 +16,7 @@ export class BotClient extends Client {
 		super({
 			partials: ["MESSAGE", "CHANNEL", "REACTION"],
 			restTimeOffset: 0,
-			intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS]
+			intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.DIRECT_MESSAGES]
 		});
 
 		LoadStatcord(this);
@@ -60,7 +60,8 @@ export class BotClient extends Client {
 	};
 
 	async start(token: string) {
-		const commands = await pGlob(`${__dirname}/../commands/**/*{.js}`);
+		const commands = await pGlob(`${__dirname}/../../Commands/**/*{.js}`);
+		const SlashCommands = await pGlob(`${__dirname}/../../Interactions/SlashCommands/*{.js}`);
 
 		commands.map(async (file: string) => {
 			let cmd: Command = await import(file);
@@ -75,6 +76,21 @@ export class BotClient extends Client {
 			Object.assign(cmd, { path: file });
 
 			this.commands.set(cmd.name, cmd);
+		});
+
+		SlashCommands.map(async (file: string) => {
+			let cmd: InteractionCommand = await import(file);
+
+			if (!cmd.name) return console.error(`Missing command name to ${file}`);
+
+			if (this.commands.get(`SlashCommand_${cmd.name}`)) {
+				console.error(`Found two commands with the same name! (${cmd.name})\nPaths:`);
+				return console.error(this.commands.get(`SlashCommand_${cmd.name}`).path + "\n" + file);
+			}
+
+			Object.assign(cmd, { path: file });
+
+			this.commands.set(`SlashCommand_${cmd.name}`, cmd);
 		});
 
 		this.login(token);

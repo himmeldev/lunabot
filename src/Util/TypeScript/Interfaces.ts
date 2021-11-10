@@ -1,7 +1,7 @@
 import { BotClient } from "../Classes/BotClient";
 import { Command, InteractionCommand } from "../Classes/Commands";
 import * as db from "quick.db";
-import { Collection, Guild, Message, User } from "discord.js";
+import { ButtonInteraction, Collection, CommandInteraction, ContextMenuInteraction, Guild, Message, SelectMenuInteraction, User } from "discord.js";
 import * as Emotes from "../../../emotes.json";
 import { Functions } from "../Handlers/LoadFunctions";
 
@@ -24,11 +24,19 @@ export interface D {
 
 export interface DData {
 	message?: Message;
-	command?: Command | InteractionCommand;
+	command?: Command | InteractionCommand | ButtonInteraction | SelectMenuInteraction | ContextMenuInteraction;
 	interaction?: object;
 	guild?: Guild;
 	user?: User;
 	args?: string[];
+}
+
+export interface RunCommand {
+	(d: D): any;
+}
+
+export interface RunInteraction {
+	(d: D, Interaction: CommandInteraction | ButtonInteraction | SelectMenuInteraction | ContextMenuInteraction): any;
 }
 
 export interface RunEvent {
