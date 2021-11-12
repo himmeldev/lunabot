@@ -1,6 +1,6 @@
-import { MessageEmbed } from "discord.js";
-import { Event } from "../../../BotTemplate/src/Util/Classes/Event";
-import { findMentions } from "../../../BotTemplate/src/Util/Regex";
+const { MessageEmbed } = require("discord.js");
+const { Event } = require("../../../BotTemplate/src/Util/Classes/Event");
+const { findMentions } = require("../../../BotTemplate/src/Util/Regex");
 
 module.exports = new Event({
 	name: "messageCreate",
@@ -63,22 +63,25 @@ async function OnPing(d) {
 	const { guild } = configuration;
 	const { Internal } = client;
 
-	const user = guild.theme === "green" ? client.users.cache.get(rose) : client.users.cache.get(avix);
+	const user = guild.theme === "green" ? client.users.cache.get(users.rose) : client.users.cache.get(users.avix);
 
-	const embed = new MessageEmbed({
-		description: `**Commands list:** \`${configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).length}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
-		hexColor: Internal.color(guild.theme),
-		image: {
-			url: Internal.banner(guild.theme)
-		},
-		footer: {
-			text: `Awesome banner made by ${user}`,
-			iconURL: user.avatarURL({ dynamic: true })
-		},
-		thumbnail: {
-			url: client.user.avatarURL({ size: 4096 })
-		}
+	return await Util.reply(d, {
+		content: null,
+		embeds: [
+			new MessageEmbed({
+				description: `**Commands list:** \`${configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).length}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
+				hexColor: Internal.color(guild.theme),
+				image: {
+					url: Internal.banner(guild.theme)
+				},
+				footer: {
+					text: `Awesome banner made by ${user}`,
+					iconURL: user.avatarURL({ dynamic: true })
+				},
+				thumbnail: {
+					url: client.user.avatarURL({ size: 4096 })
+				}
+			})
+		]
 	});
-
-	return await Util.reply(d, { content: null, embeds: [embed] });
 }
