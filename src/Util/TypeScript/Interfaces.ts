@@ -22,6 +22,7 @@ export interface D {
 		prefix: string;
 		guild?: {
 			prefix?: string;
+			theme: "green" | "purple";
 			whitelisted?: string[];
 			blacklisted?: string[];
 			starboard?: {
@@ -51,6 +52,7 @@ export interface DData {
 		prefix: string;
 		guild?: {
 			prefix?: string;
+			theme: "green" | "purple";
 			whitelisted?: string[];
 			blacklisted?: string[];
 			starboard?: {
