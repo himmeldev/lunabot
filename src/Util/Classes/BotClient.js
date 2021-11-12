@@ -1,6 +1,7 @@
 //@ts-check
 const { Client, Collection, Intents } = require("discord.js");
 const { LoadStatcord } = require("../Handlers/LoadStatcord");
+// @ts-ignore
 const glob = require("glob");
 const { promisify } = require("util");
 const pGlob = promisify(glob);
@@ -57,7 +58,9 @@ class BotClient extends Client {
 	};
 
 	async start(token) {
+		// @ts-ignore
 		const commands = await pGlob(`${__dirname}/../../commands/**/*{.js}`);
+		// @ts-ignore
 		const SlashCommands = await pGlob(`${__dirname}/..&../Interactions/SlashCommands/*{.js}`);
 
 		commands.map(async (file) => {
