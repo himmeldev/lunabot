@@ -22,14 +22,14 @@ export interface D {
 		prefix: string;
 		guild?: {
 			prefix: string;
-			whitelisted: string[];
-			blacklisted: string[];
-			starboard: {
+			whitelisted?: string[];
+			blacklisted?: string[];
+			starboard?: {
 				minStars: number;
 				channel: TextChannel;
-				customStar: string;
+				customStar?: string;
 			};
-			message_logging: {
+			message_logging?: {
 				channel: string;
 				conditions: {
 					reactToBots: boolean;
@@ -50,15 +50,15 @@ export interface DData {
 	configuration?: {
 		prefix: string;
 		guild?: {
-			prefix: string;
-			whitelisted: string[];
-			blacklisted: string[];
-			starboard: {
+			prefix?: string;
+			whitelisted?: string[];
+			blacklisted?: string[];
+			starboard?: {
 				minStars: number;
 				channel: TextChannel;
-				customStar: string;
+				customStar?: string;
 			};
-			message_logging: {
+			message_logging?: {
 				channel: string;
 				conditions: {
 					reactToBots: boolean;
