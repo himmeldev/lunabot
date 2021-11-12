@@ -5,10 +5,6 @@ module.exports = new Event({
 	name: "messageCreate",
 	run: async (d, message) => {
 		if (message.author.bot) return;
-		/**
-		 * If you don't want commands to work in dms just add change the inside of the if to:
-		 * if (message.author.bot || !message.guild) return;
-		 * */
 
 		const { configuration, db } = d;
 		const GuildsData = new db.table("GuildsData");
@@ -44,6 +40,8 @@ module.exports = new Event({
 
 		try {
 			if (command.category === "developer" && !d.client.Internal.owner(Instance.user.id)) return;
+
+			if (!command.dm && !message.guild) return d.Util.reply(Instance, { content: `This command can only be executed on servers!` });
 
 			await command.run(Instance);
 		} catch (error) {

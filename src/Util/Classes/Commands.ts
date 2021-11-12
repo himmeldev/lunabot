@@ -5,16 +5,17 @@ export class Command {
 	aliases?: string[];
 	description?: string;
 	cooldown?: {
-		type: "none" | "user" | "guild";
+		type: string;
 		time?: string;
 	};
+	dm: boolean;
 	usage?: string;
 	examples?: string;
-	category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration";
+	category: string;
 	path: string;
 	run: RunCommand;
 
-	constructor(data: { name: string; aliases?: string[]; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration"; run: Promise<any> }) {
+	constructor(data: { name: string; aliases?: string[]; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration"; run: RunCommand }) {
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
@@ -24,12 +25,12 @@ export class Command {
 export class InteractionCommand {
 	name: string;
 	description: string;
-	type: "button" | "slash" | "user_ui" | "message_ui";
+	type: string;
 	options: InteractionOption[];
 	path: string;
 	run: RunInteraction;
 
-	constructor(data: { name: string; description: string; type: "button" | "slash" | "user_ui" | "message_ui"; options: InteractionOption[]; run: Promise<any> }) {
+	constructor(data: { name: string; description: string; type: "button" | "slash" | "user_ui" | "message_ui"; options: InteractionOption[]; run: RunInteraction }) {
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
