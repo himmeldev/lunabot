@@ -16,7 +16,8 @@ module.exports = new Event({
 			member: message?.member || null,
 			guild: message?.guild || null,
 			configuration: {
-				prefix: GuildConfiguration[prefix] || configuration.prefix
+				prefix: GuildConfiguration[prefix] || configuration.prefix,
+				guild: GuildConfiguration
 			}
 		});
 
@@ -50,3 +51,10 @@ module.exports = new Event({
 		}
 	}
 });
+
+async function OnPing(d) {
+	const users = {
+		avix: "459025800633647116",
+		rose: "526059093937618954"
+	};
+}
