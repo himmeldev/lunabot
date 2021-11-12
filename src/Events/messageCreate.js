@@ -17,7 +17,7 @@ module.exports = new Event({
 			member: message?.member || null,
 			guild: message?.guild || null,
 			configuration: {
-				prefix: GuildConfiguration[prefix] || configuration.prefix,
+				prefix: GuildConfiguration["prefix"] || configuration.prefix,
 				guild: GuildConfiguration
 			}
 		});
@@ -75,7 +75,7 @@ async function OnPing(d) {
 					url: Internal.banner(guild.theme)
 				},
 				footer: {
-					text: `Awesome banner made by ${user}`,
+					text: `Awesome banner made by ${user.username}`,
 					iconURL: user.avatarURL({ dynamic: true })
 				},
 				thumbnail: {
