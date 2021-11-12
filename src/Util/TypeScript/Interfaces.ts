@@ -20,7 +20,22 @@ export interface D {
 	commands: Collection<string, Command | InteractionCommand>;
 	configuration: {
 		prefix: string;
-		guild?: Guild;
+		guild?: {
+			prefix: string;
+			whitelisted: string[];
+			blacklisted: string[];
+			starboard: {
+				minStars: number;
+				channel: TextChannel;
+				customStar: string;
+			};
+			message_logging: {
+				channel: string;
+				conditions: {
+					reactToBots: boolean;
+				};
+			};
+		};
 	};
 }
 
@@ -32,6 +47,25 @@ export interface DData {
 	guild?: Guild;
 	user?: User;
 	args?: string[];
+	configuration?: {
+		prefix: string;
+		guild?: {
+			prefix: string;
+			whitelisted: string[];
+			blacklisted: string[];
+			starboard: {
+				minStars: number;
+				channel: TextChannel;
+				customStar: string;
+			};
+			message_logging: {
+				channel: string;
+				conditions: {
+					reactToBots: boolean;
+				};
+			};
+		};
+	};
 }
 
 export interface RunCommand {
