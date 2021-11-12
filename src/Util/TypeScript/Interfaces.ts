@@ -1,13 +1,14 @@
 import { BotClient } from "../Classes/BotClient";
 import { Command, InteractionCommand } from "../Classes/Commands";
 import * as db from "quick.db";
-import { ButtonInteraction, Collection, CommandInteraction, ContextMenuInteraction, Guild, Message, SelectMenuInteraction, User } from "discord.js";
+import { ButtonInteraction, Collection, CommandInteraction, ContextMenuInteraction, Guild, Message, SelectMenuInteraction, TextChannel, User } from "discord.js";
 import * as Emotes from "../../../emotes.json";
 import { Functions } from "../Handlers/LoadFunctions";
 
 export interface D {
 	client: BotClient;
 	message?: Message;
+	channel?: TextChannel;
 	command?: Command | InteractionCommand;
 	db: typeof db;
 	guild?: Guild;
@@ -19,11 +20,13 @@ export interface D {
 	commands: Collection<string, Command | InteractionCommand>;
 	configuration: {
 		prefix: string;
+		guild?: Guild;
 	};
 }
 
 export interface DData {
 	message?: Message;
+	channel?: TextChannel;
 	command?: Command | InteractionCommand | ButtonInteraction | SelectMenuInteraction | ContextMenuInteraction;
 	interaction?: object;
 	guild?: Guild;
