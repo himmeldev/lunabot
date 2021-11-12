@@ -60,8 +60,8 @@ export class BotClient extends Client {
 	};
 
 	async start(token: string) {
-		const commands = await pGlob(`${__dirname}/../../Commands/**/*{.js}`);
-		const SlashCommands = await pGlob(`${__dirname}/../../Interactions/SlashCommands/*{.js}`);
+		const commands = await pGlob(`${process.cwd()}/src/Commands/**/*{.ts,.js}`);
+		const SlashCommands = await pGlob(`${process.cwd()}/src/Interactions/SlashCommands/*{.ts,.js}`);
 
 		commands.map(async (file: string) => {
 			let cmd: Command = await import(file);
