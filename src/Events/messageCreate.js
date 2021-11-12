@@ -14,6 +14,7 @@ module.exports = new Event({
 		const Instance = d.Util.CreateInstance(d, {
 			message,
 			user: message.author,
+			channel: message.channel,
 			member: message?.member || null,
 			guild: message?.guild || null,
 			configuration: {
@@ -25,7 +26,7 @@ module.exports = new Event({
 		const args =
 			message.content
 				?.trim()
-				?.slice(message.content.toLowerCase().startsWith("luna") ? 4 : configuration.prefix)
+				?.slice(message.content.toLowerCase().startsWith("luna") ? 4 : Instance.configuration.prefix.length)
 				?.split(/ +/g)
 				?.filter((string) => string) || [];
 
@@ -33,12 +34,13 @@ module.exports = new Event({
 
 		if (findMentions(message.content, "ids")[0] === d.client.user.id && args.length === 1) return await OnPing(Instance);
 
-		if (!message.content.startsWith(configuration.prefix) && !message.content.toLowerCase().startsWith("luna")) return;
+		if (!message.content.toLowerCase().startsWith(Instance.configuration.prefix) && !message.content.toLowerCase().startsWith("luna")) return;
 
 		const cmd = args.shift().toLowerCase();
 		if (!cmd.length) return;
 
 		const command = d.commands.find((Command) => Command.name === cmd || Command?.aliases?.includes(cmd));
+		if (!command) return;
 
 		try {
 			if (command.category === "developer" && !d.client.Internal.owner(Instance.user.id)) return;
@@ -69,7 +71,7 @@ async function OnPing(d) {
 		content: null,
 		embeds: [
 			new MessageEmbed({
-				description: `**Commands list:** \`${configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).size}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
+				description: `**Commands list:** \`${d.configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).size}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
 				hexColor: Internal.color(guild.theme),
 				image: {
 					url: Internal.banner(guild.theme)
