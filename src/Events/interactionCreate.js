@@ -5,6 +5,7 @@ module.exports = new Event({
 	run: async (d, Interaction) => {
 		const { client, Util } = d;
 		const InteractionType = Interaction.isCommand() ? "slash" : Interaction.isButton() ? "button" : Interaction.isContextMenu() ? "ui" : "selectMenu";
+		const Instance = Util.CreateInstance(d, { user: Interaction.user, member: Interaction.member, guild: Interaction?.guild || null });
 
 		switch (InteractionType) {
 			case "slash":
@@ -14,7 +15,7 @@ module.exports = new Event({
 
 				if (!cmd) return Interaction.reply({ content: `I couldn't find that slash command!` });
 
-				await cmd.run(Util.CreateInstance(d, { user: Interaction.user, member: Interaction.member, guild: Interaction?.guild || null })).catch(err => Util);
+				await cmd.run(Instance).catch((err) => Util.HandleError(Instance, err));
 		}
 	}
 });
