@@ -47,7 +47,7 @@ module.exports = new Event({
 
 			await command.run(Instance);
 		} catch (error) {
-			await d.Util.HandleError(d.client.users.cache.get(d.client.Internal.owner()[0]), Instance, error);
+			await d.Util.HandleError(Instance, error);
 			Instance.channel.send({ content: `I'm sorry! An error has ocurred ${Instance.user}, I've already contacted my developer.` });
 		}
 	}
