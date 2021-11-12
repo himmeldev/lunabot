@@ -24,8 +24,8 @@ module.exports = new Event({
 
 		const args =
 			message.content
-				?.slice(message.content.toLowerCase().startsWith("luna") ? 4 : configuration.prefix)
 				?.trim()
+				?.slice(message.content.toLowerCase().startsWith("luna") ? 4 : configuration.prefix)
 				?.split(/ +/g)
 				?.filter((string) => string) || [];
 
@@ -33,7 +33,7 @@ module.exports = new Event({
 
 		if (findMentions(message.content, "ids")[0] === d.client.user.id && args.length === 1) return await OnPing(Instance);
 
-		if (!message.content.startsWith(configuration.prefix) || !message.content.toLowerCase().startsWith("luna")) return;
+		if (!message.content.startsWith(configuration.prefix) && !message.content.toLowerCase().startsWith("luna")) return;
 
 		const cmd = args.shift().toLowerCase();
 		if (!cmd.length) return;
@@ -63,13 +63,13 @@ async function OnPing(d) {
 	const { guild } = configuration;
 	const { Internal } = client;
 
-	const user = guild.theme === "green" ? client.users.cache.get(users.rose) : client.users.cache.get(users.avix);
+	const user = guild.theme === "green" ? client.users.cache.get(users.rose) || (await client.users.fetch(users.rose)) : client.users.cache.get(users.avix) || (await client.users.fetch(users.avix));
 
 	return await Util.reply(d, {
 		content: null,
 		embeds: [
 			new MessageEmbed({
-				description: `**Commands list:** \`${configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).length}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
+				description: `**Commands list:** \`${configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).size}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
 				hexColor: Internal.color(guild.theme),
 				image: {
 					url: Internal.banner(guild.theme)
