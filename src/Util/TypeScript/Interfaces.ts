@@ -21,7 +21,7 @@ export interface D {
 	configuration: {
 		prefix: string;
 		guild?: {
-			prefix: string;
+			prefix?: string;
 			whitelisted?: string[];
 			blacklisted?: string[];
 			starboard?: {
