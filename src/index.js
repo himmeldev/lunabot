@@ -11,7 +11,7 @@ const d = {
 	client,
 	db,
 	Emotes,
-	Functions,
+	Util: Functions,
 	commands: client.commands,
 	configuration: {
 		prefix: "r!"
