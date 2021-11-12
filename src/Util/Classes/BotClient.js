@@ -68,6 +68,13 @@ class BotClient extends Client {
 
 			if (!cmd?.name) return console.error(`Missing command name to ${file}`);
 
+			cmd.name = cmd.name.toLowerCase();
+			if (Array.isArray(cmd.aliases)) {
+				for (let i = 0; i < cmd.aliases.length; i++) {
+					cmd.aliases[i] = cmd.aliases[i].toLowerCase();
+				}
+			}
+
 			if (this.commands.get(cmd.name)) {
 				console.error(`Found two commands with the same name! (${cmd.name})\nPaths:`);
 				return console.error(this.commands.get(cmd.name).path + "\n" + file);
@@ -82,6 +89,8 @@ class BotClient extends Client {
 			let cmd = require(file);
 
 			if (!cmd.name) return console.error(`Missing command name to ${file}`);
+
+			cmd.name = cmd.name.toLowerCase();
 
 			if (this.commands.get(`SlashCommand_${cmd.name}`)) {
 				console.error(`Found two commands with the same name (${cmd.name})\nPaths:`);
