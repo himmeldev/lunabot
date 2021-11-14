@@ -20,15 +20,15 @@ class BotClient extends Client {
 
 	Internal = {
 		color: (request) => {
-			if (!request) return "#99FF99";
+			if (!request) return "99FF99";
 
 			switch (request) {
 				case "green":
-					return "#99FF99";
+					return "99FF99";
 				case "purple":
-					return "#A796E8";
+					return "A796E8";
 				case "error":
-					return "#F04A4A";
+					return "F04A4A";
 			}
 		},
 		banner: (theme) => {
