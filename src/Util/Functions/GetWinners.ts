@@ -24,7 +24,7 @@ export const GetWinners = async (giveaway: Giveaway, d: D) => {
 
 		let n: number = Math.floor(Math.random() * UserList.length);
 
-		winners[winners.length] = UserList.splice(n - 1 > 0 ? n - 1 : 0, 1);
+		winners.push(UserList.splice(n - 1 > 0 ? n - 1 : 0, 1)[0]);
 	}
 
 	return {

@@ -1,3 +1,5 @@
+const { token } = require("../Functions/token");
+
 class Giveaway {
 	winnerAmount;
 	message;
@@ -8,8 +10,11 @@ class Giveaway {
 	endsAt;
 	emote;
 	prize;
+	token;
 
 	constructor(data) {
+		this.token = token(10);
+
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
