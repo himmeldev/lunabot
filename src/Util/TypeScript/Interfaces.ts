@@ -37,6 +37,10 @@ export interface D {
 				};
 			};
 		};
+		user?: {
+			user: User;
+			// GameData: {}
+		};
 	};
 }
 
@@ -66,6 +70,10 @@ export interface DData {
 					reactToBots: boolean;
 				};
 			};
+		};
+		user?: {
+			user: User;
+			// GameData: {}
 		};
 	};
 }
