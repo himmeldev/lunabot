@@ -6,7 +6,7 @@ module.exports = {
 	CheckGiveaways: async (d) => {
 		const { db, client } = d;
 		const AllGiveaways = db.get("giveaways") || db.set("giveaways", {});
-		let Arr;
+		let Arr = [];
 
 		for (const Name of Object.keys(AllGiveaways)) {
 			Arr[Arr.length] = [Name, AllGiveaways[Name]];

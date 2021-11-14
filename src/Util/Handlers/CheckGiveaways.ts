@@ -7,7 +7,7 @@ const e = require(process.cwd() + "/emotes.json");
 export const CheckGiveaways = async (d: D) => {
 	const { db, client } = d;
 	const AllGiveaways: { [key: string]: Giveaway } = db.get("giveaways") || db.set("giveaways", {});
-	let Arr: [string, Giveaway][];
+	let Arr: [string, Giveaway][] = [];
 
 	for (const Name of Object.keys(AllGiveaways)) {
 		Arr[Arr.length] = [Name, AllGiveaways[Name]];
