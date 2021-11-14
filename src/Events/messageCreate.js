@@ -9,7 +9,7 @@ module.exports = new Event({
 
 		const { configuration, db } = d;
 		const GuildsData = new db.table("GuildsData");
-		const GuildConfiguration = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { guild: { theme: "green" } });
+		const GuildConfiguration = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { theme: "green" });
 
 		const Instance = d.Util.CreateInstance(d, {
 			message,
@@ -72,7 +72,6 @@ async function OnPing(d) {
 		embeds: [
 			new MessageEmbed({
 				description: `**Commands list:** \`${d.configuration.prefix}help\`\n**Support server:** [Join here!](${Internal.link("support")})\n**Uptime:** ${Util.FormatMS(client.uptime)}\n**Commands Count:** ${d.commands.filter((Command) => !Command.name.includes("SlashCommand_")).size}\n**My Prefix:** \`${configuration.prefix}\` & \`Luna\``,
-				hexColor: Internal.color(guild.theme),
 				image: {
 					url: Internal.banner(guild.theme)
 				},
@@ -83,7 +82,7 @@ async function OnPing(d) {
 				thumbnail: {
 					url: client.user.avatarURL({ size: 4096 })
 				}
-			})
+			}).setColor(`#${d.client.Internal.color(guild.theme)}`)
 		]
 	});
 }
