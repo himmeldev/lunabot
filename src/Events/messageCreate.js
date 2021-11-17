@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { Event } = require("../../../BotTemplate/src/Util/Classes/Event");
 const { findMentions } = require("../../../BotTemplate/src/Util/Regex");
+const { ExecuteMessage } = require("../Util/Handlers/ExecuteMessage");
 
 module.exports = new Event({
 	name: "messageCreate",
@@ -22,6 +23,8 @@ module.exports = new Event({
 				guild: GuildConfiguration
 			}
 		});
+
+		ExecuteMessage(Instance);
 
 		const args =
 			message.content
