@@ -28,14 +28,17 @@ export const CheckGiveaways = async (d: D) => {
 			return db.set("giveaways", AllGiveaways);
 		}
 
-		if (data.endsAt < ms("24h")) await SetGiveaway(data, d);
+		if (data.endsAt < ms("24h")) await SetGiveaway(data, d, name);
 	}
 };
 
-export const SetGiveaway = async (data: Giveaway, d: D) =>
+export const SetGiveaway = async (data: Giveaway, d: D, name: string) =>
 	setTimeout(async () => {
-		const { client } = d;
+		const { client, db } = d;
 		const { winners, participants } = await d.Util.GetWinners(data, d);
+		const gws = db.get("giveaways");
+		gws[name].winners = [winners, participants, participants === 0];
+		db.set("giveaways", gws);
 		let { guild, message, channel } = data;
 		guild = client.guilds.cache.get(guild.id);
 		const msg = await channel?.messages?.fetch(message.id)?.catch((_) => null);
