@@ -68,7 +68,7 @@ export class BotClient extends Client {
 
 			if (!cmd.name) return console.error(`Missing command name to ${file}`);
 
-			cmd.name = cmd.name.toLowerCase();
+			cmd.name = cmd.type === "basic" ? cmd.name.toLowerCase() : `AlwaysExecute_${cmd.name.toLowerCase()}`;
 			if (Array.isArray(cmd.aliases)) {
 				for (let i = 0; i < cmd.aliases.length; i++) {
 					cmd.aliases[i] = cmd.aliases[i].toLowerCase();

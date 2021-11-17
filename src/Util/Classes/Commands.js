@@ -1,6 +1,7 @@
 class Command {
 	name;
 	aliases;
+	type = "basic";
 	description;
 	cooldown;
 	usage;
@@ -19,7 +20,7 @@ class Command {
 class InteractionCommand {
 	name;
 	description;
-	type = "slashCommand";
+	type = "slash";
 	options;
 	path;
 	run;

@@ -3,6 +3,7 @@ import { RunCommand, RunInteraction } from "../TypeScript/Interfaces";
 export class Command {
 	name: string;
 	aliases?: string[];
+	type?: string = "basic";
 	description?: string;
 	cooldown?: {
 		type: string;
@@ -15,7 +16,7 @@ export class Command {
 	path: string;
 	run: RunCommand;
 
-	constructor(data: { name: string; aliases?: string[]; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration"; run: RunCommand }) {
+	constructor(data: { name: string; aliases?: string[]; type?: "basic" | "alwaysExecute"; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration"; run: RunCommand }) {
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
