@@ -13,7 +13,7 @@ export const CheckGiveaways = async (d: D) => {
 		Arr[Arr.length] = [Name, AllGiveaways[Name]];
 	}
 
-	const PendingGiveaways = Arr.filter((GW) => !GW[1].ended());
+	const PendingGiveaways = Arr.filter((GW) => !GW[1].ended() || (GW[1].ended() && !GW[1]?.winners?.at(3)));
 
 	for (const GWData of PendingGiveaways) {
 		const [name, data] = GWData;

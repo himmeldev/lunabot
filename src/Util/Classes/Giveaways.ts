@@ -12,6 +12,7 @@ export class Giveaway {
 	emote: string;
 	prize: string;
 	token: string;
+	winners?: [string[], number, boolean];
 
 	constructor(data: { winnerAmount: number; message: Message; channel: TextChannel | NewsChannel; guild: Guild; host: User; startedAt: number; endsAt: number; emote: string; prize: string }) {
 		this.token = token(10);

@@ -11,6 +11,7 @@ class Giveaway {
 	emote;
 	prize;
 	token;
+	winners;
 
 	constructor(data) {
 		this.token = token(10);
