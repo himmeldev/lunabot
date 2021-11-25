@@ -17,13 +17,24 @@ class Command {
 	}
 }
 
-class InteractionCommand {
+class SlashCommand {
 	name;
 	description;
-	type = "slash";
 	options;
-	path;
 	run;
+	path;
+
+	constructor(data) {
+		for (const property of Object.keys(data)) {
+			this[property] = data[property];
+		}
+	}
+}
+
+class Button {
+	customId;
+	run;
+	path;
 
 	constructor(data) {
 		for (const property of Object.keys(data)) {
@@ -34,5 +45,6 @@ class InteractionCommand {
 
 module.exports = {
 	Command,
-	InteractionCommand
+	SlashCommand,
+	Button
 };

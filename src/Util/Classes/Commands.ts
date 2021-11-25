@@ -1,4 +1,4 @@
-import { RunCommand, RunInteraction } from "../TypeScript/Interfaces";
+import { RunCommand, RunSlashCommand, RunButton, RunSelectMenu, RunUIInteraction } from "../TypeScript/Interfaces";
 
 export class Command {
 	name: string;
@@ -23,15 +23,26 @@ export class Command {
 	}
 }
 
-export class InteractionCommand {
+export class SlashCommand {
 	name: string;
 	description: string;
-	type: string;
 	options: InteractionOption[];
+	run: RunSlashCommand;
 	path: string;
-	run: RunInteraction;
 
-	constructor(data: { name: string; description: string; type: "button" | "slash" | "user_ui" | "message_ui"; options: InteractionOption[]; run: RunInteraction }) {
+	constructor(data: { name: string; description: string; options: InteractionOption[]; run: RunSlashCommand }) {
+		for (const property of Object.keys(data)) {
+			this[property] = data[property];
+		}
+	}
+}
+
+export class Button {
+	customId: string;
+	run: RunButton;
+	path: string;
+
+	constructor(data: { customId: string; run: RunButton }) {
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
