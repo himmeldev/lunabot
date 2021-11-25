@@ -15,7 +15,7 @@ export class Reminder {
 	constructor(data: { reason: string; endsAt: number; user: User; channel?: TextChannel; guild: Guild }) {
 		this.setAt = Date.now();
 		this.token = token(10);
-		this.name = `${data.user}_${this.token}`;
+		this.name = `${data.user.id}_${this.token}`;
 
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];

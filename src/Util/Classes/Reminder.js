@@ -12,7 +12,7 @@ class Reminder {
 	constructor(data) {
 		this.setAt = Date.now();
 		this.token = token(10);
-		this.name = `${data.user}_${this.token}`;
+		this.name = `${data.user.id}_${this.token}`;
 
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
