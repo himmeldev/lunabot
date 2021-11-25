@@ -12,7 +12,7 @@ module.exports = {
 			Arr[Arr.length] = [Name, AllGiveaways[Name]];
 		}
 
-		const PendingGiveaways = Arr.filter((GW) => !GW[1].ended() || (GW[1].ended() && !GW[1]?.winners?.at(3)));
+		const PendingGiveaways = Arr.filter((GW) => !GW[1].ended() || (GW[1].ended() && !GW[1]?.winners?.at(3) && GW[1]?.winners?.at(2) !== 0));
 
 		for (const GWData of PendingGiveaways) {
 			const [name, data] = GWData;
