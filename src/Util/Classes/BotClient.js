@@ -6,6 +6,7 @@ const pGlob = promisify(glob);
 
 class BotClient extends Client {
 	commands = new Collection();
+	interactions = new Collection();
 	statcord;
 
 	constructor() {
@@ -58,6 +59,7 @@ class BotClient extends Client {
 	async start(token) {
 		const commands = await pGlob(`${process.cwd()}/src/Commands/**/*{.ts,.js}`);
 		const SlashCommands = await pGlob(`${process.cwd()}/src/Interactions/SlashCommands/*{.ts,.js}`);
+		const ButtonInteractions = await pGlob(`${process.cwd()}/src/Interactions/Buttons/*{.ts,.js}`);
 
 		commands.map(async (file) => {
 			let cmd = require(file);
@@ -88,14 +90,29 @@ class BotClient extends Client {
 
 			cmd.name = cmd.name.toLowerCase();
 
-			if (this.commands.get(`SlashCommand_${cmd.name}`)) {
+			if (this.interactions.get(`SlashCommand_${cmd.name}`)) {
 				console.error(`Found two commands with the same name (${cmd.name})\nPaths:`);
-				return console.error(this.commands.get(`SlashCommand_${cmd.name}`) + "\n" + file);
+				return console.error(this.interactions.get(`SlashCommand_${cmd.name}`) + "\n" + file);
 			}
 
 			Object.assign(cmd, { path: file });
 
-			this.commands.set(`SlashCommand_${cmd.name}`, cmd);
+			this.interactions.set(`SlashCommand_${cmd.name}`, cmd);
+		});
+
+		ButtonInteractions.map(async (file) => {
+			let button = await import(file);
+
+			if (!button.customId) return console.error(`Missing customId to ${file}`);
+
+			if (this.interactions.get(`Button_${button.customId}`)) {
+				console.error(`Found two buttons with the same custom ID! (${button.customId})\nPaths:`);
+				return console.error(this.interactions.get(`Button_${button.customId}`).path + "\n" + file);
+			}
+
+			Object.assign(button, { path: file });
+
+			this.interactions.set(`Button_${button.customId}`, button);
 		});
 
 		this.login(token);

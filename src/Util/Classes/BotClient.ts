@@ -1,5 +1,5 @@
 import { Client, Collection, Intents } from "discord.js";
-import { Command, InteractionCommand } from "./Commands";
+import { Command, SlashCommand, Button } from "./Commands";
 import * as Statcord from "statcord.js";
 import { LoadStatcord } from "../Handlers/LoadStatcord";
 
@@ -9,7 +9,8 @@ const { promisify } = require("util");
 const pGlob = promisify(glob);
 
 export class BotClient extends Client {
-	commands: Collection<string, Command | InteractionCommand> = new Collection();
+	commands: Collection<string, Command> = new Collection();
+	interactions: Collection<string, SlashCommand | Button> = new Collection();
 	statcord: Statcord.Client;
 
 	constructor() {
@@ -62,6 +63,7 @@ export class BotClient extends Client {
 	async start(token: string) {
 		const commands = await pGlob(`${process.cwd()}/src/Commands/**/*{.ts,.js}`);
 		const SlashCommands = await pGlob(`${process.cwd()}/src/Interactions/SlashCommands/*{.ts,.js}`);
+		const ButtonInteractions = await pGlob(`${process.cwd()}/src/Interactions/Buttons/*{.ts,.js}`);
 
 		commands.map(async (file: string) => {
 			let cmd: Command = await import(file);
@@ -86,20 +88,35 @@ export class BotClient extends Client {
 		});
 
 		SlashCommands.map(async (file: string) => {
-			let cmd: InteractionCommand = await import(file);
+			let cmd: SlashCommand = await import(file);
 
 			if (!cmd.name) return console.error(`Missing command name to ${file}`);
 
 			cmd.name = cmd.name.toLowerCase();
 
-			if (this.commands.get(`SlashCommand_${cmd.name}`)) {
+			if (this.interactions.get(`SlashCommand_${cmd.name}`)) {
 				console.error(`Found two commands with the same name! (${cmd.name})\nPaths:`);
 				return console.error(this.commands.get(`SlashCommand_${cmd.name}`).path + "\n" + file);
 			}
 
 			Object.assign(cmd, { path: file });
 
-			this.commands.set(`SlashCommand_${cmd.name}`, cmd);
+			this.interactions.set(`SlashCommand_${cmd.name}`, cmd);
+		});
+
+		ButtonInteractions.map(async (file: string) => {
+			let button: Button = await import(file);
+
+			if (!button.customId) return console.error(`Missing customId to ${file}`);
+
+			if (this.interactions.get(`Button_${button.customId}`)) {
+				console.error(`Found two buttons with the same custom ID! (${button.customId})\nPaths:`);
+				return console.error(this.interactions.get(`Button_${button.customId}`).path + "\n" + file);
+			}
+
+			Object.assign(button, { path: file });
+
+			this.interactions.set(`Button_${button.customId}`, button);
 		});
 
 		this.login(token);

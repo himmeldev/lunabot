@@ -16,6 +16,14 @@ module.exports = new Event({
 				if (!cmd) return Interaction.reply({ content: `I couldn't find that slash command!` });
 
 				await cmd.run(Instance).catch((err) => Util.HandleError(Instance, err));
+				break;
+			case "button":
+				const { customId } = Interaction;
+				const button = client.commands.get(`Button_${customId}`);
+
+				if (!button) return Interaction.reply({ content: `I couldn't find the active button, I'm sorry! Try again later.` });
+
+				await button.run(Instance).catch((err) => Util.HandleError(Instance, err));
 		}
 	}
 });
