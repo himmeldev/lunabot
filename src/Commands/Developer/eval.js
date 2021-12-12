@@ -18,7 +18,7 @@ module.exports = new Command({
 		try {
 			const evaled = await eval(args.join(" "));
 
-			const final = (typeof evaled === "object" ? RemoveToken(inspect(evaled, { depth }), d) : typeof evaled === "function" ? evaled : RemoveToken(inspect(evaled), d)) || "undefined";
+			const final = (typeof evaled === "object" ? Util.RemoveToken(inspect(evaled, { depth }), d) : typeof evaled === "function" ? evaled : Util.RemoveToken(inspect(evaled), d)) || "undefined";
 
 			if (`\`\`\`js\n${final}\`\`\``.length < 2000) return await Util.reply(d, { content: `\`\`\`js\n${final}\`\`\`` });
 
