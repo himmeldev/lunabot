@@ -16,7 +16,7 @@ export class Command {
 	path: string;
 	run: RunCommand;
 
-	constructor(data: { name: string; aliases?: string[]; type?: "basic" | "alwaysExecute"; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "fun" | "rroles" | "moderation" | "configuration" | "dev"; run: RunCommand }) {
+	constructor(data: { name: string; aliases?: string[]; type?: "basic" | "alwaysExecute"; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "interaction" | "rroles" | "moderation" | "configuration" | "dev"; run: RunCommand }) {
 		for (const property of Object.keys(data)) {
 			this[property] = data[property];
 		}
