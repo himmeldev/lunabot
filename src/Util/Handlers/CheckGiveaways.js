@@ -56,7 +56,7 @@ module.exports = {
 				return db.set("giveaways", AllGiveaways);
 			}
 
-			if (data.endsAt < ms("24h")) await SetGiveaway(data, d, name);
+			if (data.endsAt < ms("24h")) SetGiveaway(data, d, name);
 		}
 	},
 	SetGiveaway
