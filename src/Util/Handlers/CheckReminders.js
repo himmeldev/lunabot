@@ -1,38 +1,7 @@
-import { D } from "../TypeScript/Interfaces";
-import { Reminder } from "../Classes/Reminder";
-import { MessageEmbed } from "discord.js";
-import ms from "ms";
+const { MessageEmbed } = require("discord.js");
+const ms = require("ms");
 
-export const CheckReminders = async (d: D) => {
-	const { db, client } = d;
-	const AllReminders: { [key: string]: Reminder } = db.get("reminders") || db.set("reminders", {});
-	let Arr: [string, Reminder][] = [];
-
-	if (!Object.keys(AllReminders).length) return;
-	for (const Name of Object.keys(AllReminders)) {
-		Arr[Arr.length] = [Name, AllReminders[Name]];
-	}
-
-	const PendingReminders = Arr.filter((ReminderData) => !ReminderData[1].ended() || (ReminderData[1].ended() && ReminderData[1].sentMessage.delivered === false && ReminderData[1].sentMessage.error !== "Could not send message."));
-
-	for (const ReminderData of PendingReminders) {
-		const [name, data] = ReminderData;
-		let { user, guild, sentMessage } = data;
-		guild = client.guilds.cache.get(guild.id);
-		user = await user.fetch().catch((err) => null);
-
-		if (!guild || !user) {
-			data.endsAt = Date.now();
-			sentMessage.error = "Could not send message.";
-			AllReminders[name] = data;
-			return db.set("reminders", AllReminders);
-		}
-
-		if (data.endsAt < ms("24h")) SetReminder(data, d, name);
-	}
-};
-
-export const SetReminder = async (data: Reminder, d: D, name: string) =>
+const SetReminder = async (data, d, name) =>
 	setTimeout(async () => {
 		const { client, db, configuration } = d;
 		const reminders = db.get("reminders");
@@ -57,3 +26,35 @@ export const SetReminder = async (data: Reminder, d: D, name: string) =>
 		reminders[name] = data;
 		db.set("reminders", reminders);
 	}, data.endsAt - Date.now());
+
+module.exports = {
+	CheckReminders: async (d) => {
+		const { db, client } = d;
+		const AllReminders = db.get("reminders") || db.set("reminders", {});
+		let Arr = [];
+
+		if (!Object.keys(AllReminders).length) return;
+		for (const Name of Object.keys(AllReminders)) {
+			Arr[Arr.length] = [Name, AllReminders[Name]];
+		}
+
+		const PendingReminders = Arr.filter((ReminderData) => !ReminderData[1].ended() || (ReminderData[1].ended() && ReminderData[1].sentMessage.delivered === false && ReminderData[1].sentMessage.error !== "Could not send message."));
+
+		for (const ReminderData of PendingReminders) {
+			const [name, data] = ReminderData;
+			let { user, guild, sentMessage } = data;
+			guild = client.guilds.cache.get(guild.id);
+			user = await user.fetch().catch((err) => null);
+
+			if (!guild || !user) {
+				data.endsAt = Date.now();
+				sentMessage.error = "Could not send message.";
+				AllReminders[name] = data;
+				return db.set("reminders", AllReminders);
+			}
+
+			if (data.endsAt < ms("24h")) SetReminder(data, d, name);
+		}
+	},
+	SetReminder
+};
