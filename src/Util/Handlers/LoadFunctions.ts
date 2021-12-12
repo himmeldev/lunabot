@@ -7,6 +7,7 @@ import { token } from "../Functions/token";
 import { CleanSymbols } from "../Functions/CleanSymbols";
 import { RemoveToken } from "../Functions/RemoveToken";
 import { TimeStamp } from "../Functions/TimeStamp";
+import { FetchLanguage } from "../Functions/FetchLanguage";
 
 export const Functions = {
 	reply,
@@ -17,5 +18,6 @@ export const Functions = {
 	token,
 	CleanSymbols,
 	RemoveToken,
-	TimeStamp
+	TimeStamp,
+	FetchLanguage
 };

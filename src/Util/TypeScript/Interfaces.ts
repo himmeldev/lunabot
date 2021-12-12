@@ -23,6 +23,7 @@ export interface D {
 		prefix: string;
 		guild?: {
 			prefix?: string;
+			language: string;
 			theme: "green" | "purple";
 			whitelisted?: string[];
 			blacklisted?: string[];
@@ -58,6 +59,7 @@ export interface DData {
 		prefix: string;
 		guild?: {
 			prefix?: string;
+			language: string;
 			theme: "green" | "purple";
 			whitelisted?: string[];
 			blacklisted?: string[];

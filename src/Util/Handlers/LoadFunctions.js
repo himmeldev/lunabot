@@ -7,6 +7,7 @@ const { token } = require("../Functions/token");
 const { CleanSymbols } = require("../Functions/CleanSymbols");
 const { TimeStamp } = require("../Functions/TimeStamp");
 const { RemoveToken } = require("../Functions/RemoveToken");
+const { FetchLanguage } = require("../Functions/FetchLanguage");
 
 module.exports = {
 	Functions: {
@@ -18,6 +19,7 @@ module.exports = {
 		token,
 		CleanSymbols,
 		RemoveToken,
-		TimeStamp
+		TimeStamp,
+		FetchLanguage
 	}
 };
