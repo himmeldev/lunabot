@@ -13,6 +13,7 @@ const d = {
 	Emotes,
 	Util: Functions,
 	commands: client.commands,
+	interactions: client.interactions,
 	configuration: {
 		prefix: "r!"
 	}

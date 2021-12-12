@@ -18,7 +18,8 @@ export interface D {
 	interaction?: object;
 	Util: typeof Functions;
 	Emotes: typeof Emotes;
-	commands: Collection<string, Command | SlashCommand | Button>;
+	commands: Collection<string, Command>;
+	interactions: Collection<string, SlashCommand>;
 	configuration: {
 		prefix: string;
 		guild?: {
