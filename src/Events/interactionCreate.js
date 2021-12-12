@@ -4,9 +4,10 @@ module.exports = new Event({
 	name: "interactionCreate",
 	run: async (d, Interaction) => {
 		const { client, Util } = d;
-		const InteractionType = Interaction.isCommand() ? "slash" : Interaction.isButton() ? "button" : Interaction.isContextMenu() ? "ui" : "selectMenu";
+		const InteractionType = Interaction.isCommand() ? "slash" : "ui";
 		const Instance = Util.CreateInstance(d, { user: Interaction.user, member: Interaction.member, guild: Interaction?.guild || null });
 
+		if (!Interaction.isCommand() && !Interaction.isContextMenu()) return;
 		switch (InteractionType) {
 			case "slash":
 				await client.application.commands.fetch().catch((err) => "Timed out");
