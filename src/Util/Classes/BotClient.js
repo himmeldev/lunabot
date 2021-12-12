@@ -8,6 +8,7 @@ class BotClient extends Client {
 	commands = new Collection();
 	interactions = new Collection();
 	statcord;
+	devs;
 
 	constructor() {
 		super({

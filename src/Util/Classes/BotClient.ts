@@ -1,4 +1,4 @@
-import { Client, Collection, Intents } from "discord.js";
+import { Client, Collection, Intents, User } from "discord.js";
 import { Command, SlashCommand, Button } from "./Commands";
 import * as Statcord from "statcord.js";
 import { LoadStatcord } from "../Handlers/LoadStatcord";
@@ -12,6 +12,7 @@ export class BotClient extends Client {
 	commands: Collection<string, Command> = new Collection();
 	interactions: Collection<string, SlashCommand | Button> = new Collection();
 	statcord: Statcord.Client;
+	devs: User[]; /** Defined in 'ready' event */
 
 	constructor() {
 		super({

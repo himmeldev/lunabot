@@ -1,7 +1,7 @@
 import { BotClient } from "../Classes/BotClient";
 import { Button, Command, SlashCommand } from "../Classes/Commands";
 import * as db from "quick.db";
-import { ButtonInteraction, Collection, CommandInteraction, ContextMenuInteraction, Guild, Message, SelectMenuInteraction, TextChannel, User } from "discord.js";
+import { ButtonInteraction, Collection, CommandInteraction, ContextMenuInteraction, Guild, GuildMember, Message, SelectMenuInteraction, TextChannel, User } from "discord.js";
 const Emotes = require(process.cwd() + "/emotes.json");
 import { Functions } from "../Handlers/LoadFunctions";
 
@@ -13,6 +13,7 @@ export interface D {
 	db: typeof db;
 	guild?: Guild;
 	user?: User;
+	member?: GuildMember;
 	args?: string[];
 	interaction?: object;
 	Util: typeof Functions;
@@ -51,6 +52,7 @@ export interface DData {
 	interaction?: object;
 	guild?: Guild;
 	user?: User;
+	member?: GuildMember;
 	args?: string[];
 	configuration?: {
 		prefix: string;
