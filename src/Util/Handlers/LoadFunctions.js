@@ -5,7 +5,7 @@ const { HandleError } = require("../Functions/HandleError");
 const { GetWinners } = require("../Functions/GetWinners");
 const { token } = require("../Functions/token");
 const { CleanSymbols } = require("../Functions/CleanSymbols");
-const TimeStamp = require("../Functions/TimeStamp");
+const { TimeStamp } = require("../Functions/TimeStamp");
 const { RemoveToken } = require("../Functions/RemoveToken");
 
 module.exports = {

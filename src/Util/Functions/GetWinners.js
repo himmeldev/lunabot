@@ -1,5 +1,5 @@
 module.exports = {
-	GetWinner: async (giveaway, d) => {
+	GetWinners: async (giveaway, d) => {
 		const { channel, message, guild } = giveaway;
 		const msg = await channel.messages.fetch(message.id).catch((err) => null);
 		const reactions = await msg?.reactions?.resolve(giveaway.emote)?.catch((err) => null);
