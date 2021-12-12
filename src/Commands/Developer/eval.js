@@ -6,7 +6,7 @@ module.exports = new Command({
 	type: "basic",
 	category: "dev",
 	dm: true,
-	usage: "(p)eval <Code>",
+	usage: "<Code>",
 	run: async (d) => {
 		const { Emotes, Util, client, commands, configuration, db, args, channel, command, guild, message, user, member } = d;
 		const { inspect } = require("util");
