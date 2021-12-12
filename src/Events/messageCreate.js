@@ -10,7 +10,8 @@ module.exports = new Event({
 
 		const { configuration, db } = d;
 		const GuildsData = new db.table("GuildsData");
-		const GuildConfiguration = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { theme: "green" });
+		let GuildConfiguration;
+		if (message.guild) GuildsData = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { theme: "green" });
 
 		const Instance = d.Util.CreateInstance(d, {
 			message,
@@ -19,12 +20,12 @@ module.exports = new Event({
 			member: message?.member || null,
 			guild: message?.guild || null,
 			configuration: {
-				prefix: GuildConfiguration["prefix"] || configuration.prefix,
+				prefix: GuildConfiguration?.prefix || configuration.prefix,
 				guild: GuildConfiguration
 			}
 		});
 
-		ExecuteMessage(Instance);
+		if (GuildConfiguration) ExecuteMessage(Instance);
 
 		const args =
 			message.content
@@ -44,6 +45,7 @@ module.exports = new Event({
 
 		const command = d.commands.find((Command) => Command.name === cmd || Command?.aliases?.includes(cmd));
 		if (!command) return;
+		Instance.command = command;
 
 		try {
 			if (command.category === "dev" && !d.client.Internal.owner(Instance.user.id)) return;
