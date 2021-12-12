@@ -1,5 +1,6 @@
 const { Event } = require("../Util/Classes/Event");
 const { CheckGiveaways } = require("../Util/Handlers/CheckGiveaways");
+const { CheckReminders } = require("../Util/Handlers/CheckReminders");
 const { author } = require(`${process.cwd()}/package.json`);
 
 module.exports = new Event({
@@ -10,6 +11,7 @@ module.exports = new Event({
 		console.log(`The client '${client.user.tag}' is online.\nCounting data:\n[${d.commands.size}] Commands were loaded (${AliasesCount(d.commands)} Aliases.)\n[${client._eventsCount}] Events active.`);
 
 		await CheckGiveaways(d);
+		await CheckReminders(d);
 	}
 });
 
