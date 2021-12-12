@@ -11,7 +11,7 @@ module.exports = new Event({
 		const { configuration, db } = d;
 		const GuildsData = new db.table("GuildsData");
 		let GuildConfiguration;
-		if (message.guild) GuildsData = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { theme: "green" });
+		if (message.guild) GuildConfiguration = GuildsData.get(message.guild.id) || GuildsData.set(message.guild.id, { theme: "green" });
 
 		const Instance = d.Util.CreateInstance(d, {
 			message,
