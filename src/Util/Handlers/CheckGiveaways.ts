@@ -9,6 +9,7 @@ export const CheckGiveaways = async (d: D) => {
 	const AllGiveaways: { [key: string]: Giveaway } = db.get("giveaways") || db.set("giveaways", {});
 	let Arr: [string, Giveaway][] = [];
 
+	if (!Object.keys(AllGiveaways).length) return;
 	for (const Name of Object.keys(AllGiveaways)) {
 		Arr[Arr.length] = [Name, AllGiveaways[Name]];
 	}

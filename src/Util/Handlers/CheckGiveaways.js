@@ -36,6 +36,7 @@ module.exports = {
 		const AllGiveaways = db.get("giveaways") || db.set("giveaways", {});
 		let Arr = [];
 
+		if (!Object.keys(AllGiveaways).length) return;
 		for (const Name of Object.keys(AllGiveaways)) {
 			Arr[Arr.length] = [Name, AllGiveaways[Name]];
 		}
