@@ -1,6 +1,6 @@
 export const FetchLanguage = (interaction: string, language: string) => {
 	const f = require(`${process.cwd()}/src/Languages/${language}.json`);
-	if (f) return f[interaction];
+	if (f) return eval("f." + interaction);
 
-	return require(`${process.cwd()}/src/Languages/English.json`)[interaction];
+	return eval("require(`${process.cwd()}/src/Languages/English.json`)." + interaction);
 };
