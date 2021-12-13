@@ -7,12 +7,26 @@ class Command {
 	usage;
 	examples;
 	category = "general";
+	permissions;
 	path;
 	run;
 
 	constructor(data) {
+		this.permissions = { user: [], bot: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "EMBED_LINKS"] };
+
 		for (const property of Object.keys(data)) {
-			this[property] = data[property];
+			switch (property) {
+				case "permissions":
+					if (data.permissions?.bot?.at(0)) {
+						this.permissions.bot.push(...data.permissions.bot);
+						this.permissions.bot.flat();
+					}
+					this.permissions.user = data.permissions.user || [];
+					break;
+				default:
+					this[property] = data[property];
+					break;
+			}
 		}
 	}
 }
