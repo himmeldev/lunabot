@@ -10,6 +10,7 @@ import { TimeStamp } from "../Functions/TimeStamp";
 import { FetchLanguage } from "../Functions/FetchLanguage";
 import { ReplaceKeywords } from "../Functions/ReplaceKeywords";
 import { NoticeError } from "../Functions/NoticeError";
+import { TLU } from "../Functions/TLU";
 
 export const Functions = {
 	reply,
@@ -23,5 +24,6 @@ export const Functions = {
 	TimeStamp,
 	FetchLanguage,
 	ReplaceKeywords,
-	NoticeError
+	NoticeError,
+	TLU
 };

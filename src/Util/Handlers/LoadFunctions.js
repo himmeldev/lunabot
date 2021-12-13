@@ -10,6 +10,7 @@ const { RemoveToken } = require("../Functions/RemoveToken");
 const { FetchLanguage } = require("../Functions/FetchLanguage");
 const { ReplaceKeywords } = require("../Functions/ReplaceKeywords");
 const { NoticeError } = require("../Functions/NoticeError");
+const { TLU } = require("../Functions/TLU");
 
 module.exports = {
 	Functions: {
@@ -24,6 +25,7 @@ module.exports = {
 		TimeStamp,
 		FetchLanguage,
 		ReplaceKeywords,
-		NoticeError
+		NoticeError,
+		TLU
 	}
 };
