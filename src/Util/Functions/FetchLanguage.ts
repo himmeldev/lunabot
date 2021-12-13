@@ -2,6 +2,7 @@ import { D } from "../TypeScript/Interfaces";
 import { ReplaceKeywords } from "./ReplaceKeywords";
 
 export const FetchLanguage = (interaction: string, language: string, d: D) => {
+	interaction = interaction.replace(/\./g, "?.");
 	const f = require(`${process.cwd()}/src/Languages/${language}.json`);
 	if (f) return ReplaceKeywords(eval("f." + interaction), d);
 

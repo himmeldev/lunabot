@@ -39,7 +39,7 @@ module.exports = {
 					string = string.replace(rgx, list.MissingPermissions(d.member, "user"));
 					break;
 				default:
-					string = string.replace(rgx, eval("list." + KeyWord));
+					string = string.replace(rgx, eval("list?." + KeyWord));
 					break;
 			}
 		}
