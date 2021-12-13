@@ -12,7 +12,7 @@ class Command {
 	run;
 
 	constructor(data) {
-		this.permissions = { user: [], bot: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "EMBED_LINKS"] };
+		this.permissions = { user: [], bot: ["SEND_MESSAGES", "EMBED_LINKS"] };
 
 		for (const property of Object.keys(data)) {
 			switch (property) {

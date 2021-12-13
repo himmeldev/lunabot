@@ -21,7 +21,7 @@ export class Command {
 	run: RunCommand;
 
 	constructor(data: { name: string; aliases?: string[]; type?: "basic" | "alwaysExecute"; description?: string; cooldown?: { type: "none" | "user" | "guild"; time?: string }; dm: boolean; usage?: string; examples?: string; category: "general" | "utility" | "bot" | "interaction" | "rroles" | "moderation" | "configuration" | "dev"; permissions?: { user?: string[]; bot?: [] }; run: RunCommand }) {
-		this.permissions = { user: [], bot: ["SEND_MESSAGES", "VIEW_CHANNEL", "READ_MESSAGE_HISTORY", "EMBED_LINKS"] };
+		this.permissions = { user: [], bot: ["SEND_MESSAGES", "EMBED_LINKS"] };
 
 		for (const property of Object.keys(data)) {
 			switch (property) {
