@@ -1,3 +1,5 @@
+const { Permissions, Util } = require("discord.js");
+
 module.exports = {
 	ReplaceKeywords: (string, d) => {
 		const { Emotes, client, commands, configuration, db, interactions, args, channel, command, guild, interaction, member, message, user } = d;
@@ -15,14 +17,31 @@ module.exports = {
 			interactions,
 			args,
 			channel,
-			Emotes
+			Emotes,
+			MissingPermissions: (target, type) => {
+				return command.permissions[type]
+					.filter((Permission) => !target.permissions.has(Permissions.FLAGS[Permission]))
+					.map((str) => d.Util.TLU(str.replace(/_/g, " ")))
+					.join(" ");
+			}
 		};
 
 		if (!KeyWords) return string;
-		for (const KeyWord of KeyWords) {
-			KeyWord.replace(/\./g, "?.");
+		for (let KeyWord of KeyWords) {
+			KeyWord = KeyWord.replace(/\./g, "?.");
 			const rgx = new RegExp(`%${KeyWord}%`, "g");
-			string = string.replace(rgx, eval("list." + KeyWord));
+
+			switch (KeyWord) {
+				case "BotMissingPermissions":
+					string = string.replace(rgx, list.MissingPermissions(d.guild.members.cache.get(d.client.user.id), "bot"));
+					break;
+				case "UserMissingPermissions":
+					string = string.replace(rgx, list.MissingPermissions(d.member, "user"));
+					break;
+				default:
+					string = string.replace(rgx, eval("list." + KeyWord));
+					break;
+			}
 		}
 
 		return string;

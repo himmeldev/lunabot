@@ -1,3 +1,4 @@
+import { Guild, GuildMember, Permissions } from "discord.js";
 import { D } from "../TypeScript/Interfaces";
 
 export const ReplaceKeywords = (string: string, d: D) => {
@@ -16,14 +17,32 @@ export const ReplaceKeywords = (string: string, d: D) => {
 		interactions,
 		args,
 		channel,
-		Emotes
+		Emotes,
+		MissingPermissions: (target: GuildMember, type: "user" | "bot") => {
+			//@ts-ignore
+			return command.permissions[type]
+				.filter((Permission: string) => !target.permissions.has(Permissions.FLAGS[Permission]))
+				.map((str: string) => d.Util.TLU(str.replace(/_/g, " ")))
+				.join(", ");
+		}
 	};
 
 	if (!KeyWords) return string;
-	for (const KeyWord of KeyWords) {
-		KeyWord.replace(/\./g, "?.");
+	for (let KeyWord of KeyWords) {
+		KeyWord = KeyWord.replace(/\./g, "?.");
 		const rgx = new RegExp(`%${KeyWord}%`, "g");
-		string = string.replace(rgx, eval("list." + KeyWord));
+
+		switch (KeyWord) {
+			case "BotMissingPermissions":
+				string = string.replace(rgx, list.MissingPermissions(d.guild.members.cache.get(d.client.user.id), "bot"));
+				break;
+			case "UserMissingPermissions":
+				string = string.replace(rgx, list.MissingPermissions(d.member, "user"));
+				break;
+			default:
+				string = string.replace(rgx, eval("list." + KeyWord));
+				break;
+		}
 	}
 
 	return string;
