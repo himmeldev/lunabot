@@ -1,0 +1,9 @@
+{
+	"error": {
+		"footer": "If you think this error shouldn't pop up, please use %prefix%help report",
+		"cd": { "message": "Hey %user%!, the command %prefix%%command.name% is on cooldown", "title": "This command is on cooldown!" },
+		"wrong_usage": { "message": "The command `%command.name%` should not be used that way...\nIt should be used like this:\n> %prefix%%command.name% %command.usage%", "title": "You're using it wrong @%user.tag%!" },
+		"bot_missing_permissions": { "message": "Oh no... I can't execute this command (`%command.name%`) because I'm missing the next permissions:\n> %BotMissingPermissions%", "title": "I'm missing permissions!" },
+		"user_missing_permissions": { "message": "Nop, nop. You can't use this (`%command.name%`) because you're missing the next permissions:\n> %UserMissingPermissions%", "title": "Hey @%user.tag%, you're missing permissions!" }
+	}
+}
