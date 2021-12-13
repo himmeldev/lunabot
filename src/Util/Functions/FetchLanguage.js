@@ -1,8 +1,10 @@
-module.exports = {
-	FetchLanguage: (interaction, language) => {
-		const f = require(`${process.cwd()}/src/Languages/${language}.json`);
-		if (f) return eval("f." + interaction);
+const { ReplaceKeywords } = require("./ReplaceKeywords");
 
-		return eval("require(`${process.cwd()}/src/Languages/English.json`)." + interaction);
+module.exports = {
+	FetchLanguage: (interaction, language, d) => {
+		const f = require(`${process.cwd()}/src/Languages/${language}.json`);
+		if (f) return ReplaceKeywords(eval("f." + interaction), d);
+
+		return ReplaceKeywords(eval("require(`${process.cwd()}/src/Languages/English.json`)." + interaction), d);
 	}
 };

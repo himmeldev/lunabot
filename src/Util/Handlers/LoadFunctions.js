@@ -8,6 +8,8 @@ const { CleanSymbols } = require("../Functions/CleanSymbols");
 const { TimeStamp } = require("../Functions/TimeStamp");
 const { RemoveToken } = require("../Functions/RemoveToken");
 const { FetchLanguage } = require("../Functions/FetchLanguage");
+const { ReplaceKeywords } = require("../Functions/ReplaceKeywords");
+const { NoticeError } = require("../Functions/NoticeError");
 
 module.exports = {
 	Functions: {
@@ -20,6 +22,8 @@ module.exports = {
 		CleanSymbols,
 		RemoveToken,
 		TimeStamp,
-		FetchLanguage
+		FetchLanguage,
+		ReplaceKeywords,
+		NoticeError
 	}
 };

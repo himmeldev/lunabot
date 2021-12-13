@@ -8,6 +8,8 @@ import { CleanSymbols } from "../Functions/CleanSymbols";
 import { RemoveToken } from "../Functions/RemoveToken";
 import { TimeStamp } from "../Functions/TimeStamp";
 import { FetchLanguage } from "../Functions/FetchLanguage";
+import { ReplaceKeywords } from "../Functions/ReplaceKeywords";
+import { NoticeError } from "../Functions/NoticeError";
 
 export const Functions = {
 	reply,
@@ -19,5 +21,7 @@ export const Functions = {
 	CleanSymbols,
 	RemoveToken,
 	TimeStamp,
-	FetchLanguage
+	FetchLanguage,
+	ReplaceKeywords,
+	NoticeError
 };
