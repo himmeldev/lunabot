@@ -9,6 +9,7 @@ module.exports = {
 			.setFooter(d.Util.FetchLanguage("error.footer", lang, d))
 			.setDescription(d.Util.FetchLanguage(`error.${type}.message`, lang, d));
 
+		if (d.interaction) return await d.interaction.reply({ content: null, embeds: [ErrorEmbed], ephemeral: true });
 		return await d.channel.send({ content: null, embeds: [ErrorEmbed] });
 	}
 };
