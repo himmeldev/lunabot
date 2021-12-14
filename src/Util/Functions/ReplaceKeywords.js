@@ -2,7 +2,7 @@ const { Permissions, Util } = require("discord.js");
 
 module.exports = {
 	ReplaceKeywords: (string, d) => {
-		const { Emotes, client, commands, configuration, db, interactions, args, channel, command, guild, interaction, member, message, user } = d;
+		const { Emotes, client, commands, configuration, db, interactions, args, channel, command, guild, interaction, member, message, user, error } = d;
 		const KeyWords = string?.match(/%[^%]+%/g)?.map((result) => result?.replace(/%/g, ""));
 		const list = {
 			prefix: d.configuration.prefix,
@@ -18,6 +18,7 @@ module.exports = {
 			args,
 			channel,
 			Emotes,
+			error,
 			MissingPermissions: (target, type) => {
 				return command.permissions[type]
 					.filter((Permission) => !target.permissions.has(Permissions.FLAGS[Permission]))

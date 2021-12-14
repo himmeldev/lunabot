@@ -45,6 +45,7 @@ export interface D {
 			// GameData: {}
 		};
 	};
+	error?: any;
 }
 
 export interface DData {
@@ -81,6 +82,7 @@ export interface DData {
 			// GameData: {}
 		};
 	};
+	error?: any;
 }
 
 export interface RunCommand {

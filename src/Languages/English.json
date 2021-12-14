@@ -7,7 +7,8 @@
 		"user_missing_permissions": { "message": "Nop, nop. You can't use this (`%command.name%`) because you're missing the next permissions:\n> %UserMissingPermissions%", "title": "Hey @%user.tag%, you're missing permissions!" },
 		"interaction_filter": { "message": "This interaction is supposed to be used by %user%, not by you %interaction.user%!", "title": "Hey! You can't use this interaction!" },
 		"command_not_found": { "message": "The command %args[0]% does not exist!", "title": "I- couldn't find that command..." },
-		"internal_error": { "message": "I'm sorry! An error has ocurred %user%, I've already contacted my developer.\n*Sigh* This error is just because my developer codes awfully, but don't worry, the problem will be fixed soon.", "title": "Hm- Something went wrong..." }
+		"internal_error": { "message": "I'm sorry! An error has ocurred %user%, I've already contacted my developer.\n*Sigh* This error is just because my developer codes awfully, but don't worry, the problem will be fixed soon.", "title": "Hm- Something went wrong..." },
+		"internal_error_report": { "message": "New error received: %error%", "title": "New Error found." }
 	},
 	"commands": {
 		"help": {

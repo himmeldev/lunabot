@@ -2,7 +2,7 @@ import { Guild, GuildMember, Permissions } from "discord.js";
 import { D } from "../TypeScript/Interfaces";
 
 export const ReplaceKeywords = (string: string, d: D) => {
-	const { Emotes, client, commands, configuration, db, interactions, args, channel, command, guild, interaction, member, message, user } = d;
+	const { Emotes, client, commands, configuration, db, interactions, args, channel, command, guild, interaction, member, message, user, error } = d;
 	const KeyWords = string?.match(/%[^%]+%/g)?.map((result) => result?.replace(/%/g, ""));
 	const list = {
 		prefix: d.configuration.prefix,
@@ -18,6 +18,7 @@ export const ReplaceKeywords = (string: string, d: D) => {
 		args,
 		channel,
 		Emotes,
+		error,
 		MissingPermissions: (target: GuildMember, type: "user" | "bot") => {
 			//@ts-ignore
 			return command.permissions[type]
