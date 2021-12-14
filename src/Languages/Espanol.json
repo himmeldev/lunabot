@@ -1,0 +1,21 @@
+{
+	"error": {
+		"footer": "Si crees que este error no debería aparecer, por favor utiliza %prefix%help report",
+		"cd": { "message": "Ey %user%!, el comando %prefix%%command.name% está en enfriamiento!", "title": "Este comando está en enfriamiento!" },
+		"wrong_usage": { "message": "El comando `%command.name%` no debería de utilizarse así...\nSe debería de usar así:\n> %prefix%%command.name% %command.usage%", "title": "Lo estás usando mal @%user.tag%!" },
+		"bot_missing_permissions": { "message": "Oh no... no puedo ejecutar este comando (`%command.name%`) porque me faltan los siguientes permisos:\n> %BotMissingPermissions%", "title": "Me faltan permisos!" },
+		"user_missing_permissions": { "message": "Nop, nop. No lo puedes usar (`%command.name%`) porque necesitas los siguientes permisos:\n> %UserMissingPermissions%", "title": "Ey @%user.tag%, requieres de más permisos!" },
+		"interaction_filter": { "message": "Se supone que esta interacción debería de ser usada por %user%, no por tí %interaction.user%!", "title": "Ey! No puedes usar esta interacción!" },
+		"interaction_not_found": { "message": "No he podido encontrar la interacción que estás tratando de ejecutar... hm.. Esto es incómodo...", "title": "No he podido encontrar esa interacción..." },
+		"command_not_found": { "message": "El comando %args[0]% no existe!", "title": "No he podido encontrar ese comando..." },
+		"internal_error": { "message": "Lo siento! Ha ocurrido un error %user%, Ya he contactado a mi desarrollador.\n*Tos* Este error es porque mi desarrollador programa muy mal, pero no te preocupes, el problema será arreglado pronto.", "title": "Vaya, algo anda mal..." },
+		"internal_error_report": { "message": "Nuevo error recibido: %error%", "title": "Nuevo error encontrado." }
+	},
+	"commands": {
+		"help": {
+			"no_args_description": "> Si quieres más detalles sobre un comando, utiliza %prefix%%command.name% [comando]\nSi ves algún error, repórtalo con %prefix%report",
+			"collector_timeout": "Esta interacción ya ha finalizado, han pasado 10 minutos desde que el menú fue abierto, por lo que fue automáticamente desactivado."
+		}
+	}
+}
+
