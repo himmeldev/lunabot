@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import { D } from "../TypeScript/Interfaces";
 
-export const NoticeError = async (type: "cd" | "wrong_usage" | "bot_missing_permissions" | "user_missing_permissions" | "interaction_filter" | "command_not_found", d: D) => {
+export const NoticeError = async (type: "cd" | "wrong_usage" | "bot_missing_permissions" | "user_missing_permissions" | "interaction_filter" | "command_not_found" | "internal_error", d: D) => {
 	const lang = d.configuration.guild.language;
 	const ErrorEmbed = new MessageEmbed()
 		.setColor(`#${d.client.Internal.color("error")}`)
@@ -11,5 +11,5 @@ export const NoticeError = async (type: "cd" | "wrong_usage" | "bot_missing_perm
 
 	//@ts-ignore
 	if (d.interaction) return await d.interaction.reply({ content: null, embeds: [ErrorEmbed], ephemeral: true });
-	return await d.channel.send({ content: null, embeds: [ErrorEmbed] });
+	return await d.Util.reply(d, { content: null, embeds: [ErrorEmbed] });
 };

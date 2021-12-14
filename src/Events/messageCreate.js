@@ -55,7 +55,7 @@ module.exports = new Event({
 			await command.run(Instance);
 		} catch (error) {
 			await d.Util.HandleError(Instance, error);
-			Instance.channel.send({ content: `I'm sorry! An error has ocurred ${Instance.user}, I've already contacted my developer.\n*Sigh* This error is just because my developer codes awfully, but don't worry, the problem will be fixed soon.` });
+			await d.Util.NoticeError("internal_error", Instance);
 		}
 	}
 });
