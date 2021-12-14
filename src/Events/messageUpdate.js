@@ -32,8 +32,6 @@ module.exports = new Event({
 			}
 		});
 
-		if (GuildConfiguration) ExecuteMessage(Instance);
-
 		const args =
 			message.content
 				?.trim()
